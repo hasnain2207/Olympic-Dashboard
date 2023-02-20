@@ -29,7 +29,7 @@ data = pd.merge(df1, df2)
 
 data.info()
 #df = data.drop(['notes'],axis=1)
-
+st.header('Olympic History Dashboard')
 Years = data['Year'].unique()
 #selection = st.multiselect('Select Year', Years)
 
@@ -50,7 +50,7 @@ gold = subset.Medal.value_counts().Gold
 silver = subset.Medal.value_counts().Silver
 bronze = subset.Medal.value_counts().Bronze
 
-st.header('Olympic History Dashboard')
+
 col1, col2, col3, col4, col5 = st.columns(5)
 
 
