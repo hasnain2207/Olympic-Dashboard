@@ -34,7 +34,7 @@ Years = data['Year'].unique()
 #selection = st.multiselect('Select Year', Years)
 
 st.sidebar.header("Select Filters:")
-selection = st.multiselect(
+selection = st.sidebar.multiselect(
     "Select Year:",
         options = Years,
         default = Years)
