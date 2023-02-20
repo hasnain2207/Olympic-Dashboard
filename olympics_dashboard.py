@@ -48,7 +48,7 @@ Type = st.sidebar.multiselect(
 #    "Select Year:",
 #        options = Years,
 #        default = Years)
-subset = data[data['Year'] == selection]
+#subset = data[data['Year'] == selection]
 drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
 subset1 = drop_data.query("Year == @selection")
