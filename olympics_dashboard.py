@@ -49,8 +49,8 @@ selection = st.multiselect(
 #subset = data[data['Year'] == selection]
 drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
-subset = drop_data.query("Year == @selection")
-#subset = data.query("Year == @selection")
+subset1 = drop_data.query("Year == @selection")
+subset = data.query("Year == @selection")
 #st.dataframe(subset)
 
 col1.metric('Number of Participations', total_participations)
@@ -59,9 +59,9 @@ col3.metric('Gold Medals', gold)
 col4.metric('Silver Medals', silver)
 col5.metric('Bronze Medals', bronze)
 
-bar_data = data.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
+bar_data = subset.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
 #line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
-line_data = pd.crosstab(data['Year'], data['Medal'])
+line_data = pd.crosstab(subset['Year'], subset['Medal'])
 
 #st.dataframe(line_data)
 with st.container():
@@ -73,7 +73,7 @@ with st.container():
     left.bar_chart(bar_data)
         
 st.header('Overall View')
-st.dataframe(subset)
+st.dataframe(subset1)
        
    #left.header('Area Chart Visual')
    #left.area_chart(subset)
