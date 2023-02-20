@@ -18,20 +18,16 @@ SHEET_ID_REGION = '1nQJcG5UJ_pK08AnPMgy5U7yJCc_gefKwrV-RXf1z1qg'
 url1 = f'https://docs.google.com/spreadsheets/d/{SHEET_ID_ATHLETE}/gviz/tq?tqx=out:csv'
 url2 = f'https://docs.google.com/spreadsheets/d/{SHEET_ID_REGION}/gviz/tq?tqx=out:csv'
 
-#file1 = r'C:\Users\Lenovo\Desktop\Class 1 Python\Assignments\3rd Assignment\archive (1)\athlete_events.csv'
 df1 = pd.read_csv(url1)
 
-#file2 = r'C:\Users\Lenovo\Desktop\Class 1 Python\Assignments\3rd Assignment\archive (1)\noc_regions.csv'
 df2 = pd.read_csv(url2)
 
 data = pd.merge(df1, df2)
-#data.isna().any()
 
 data.info()
 #df = data.drop(['notes'],axis=1)
 st.header('Olympic History Dashboard')
 Years = data['Year'].unique()
-#selection = st.multiselect('Select Year', Years)
 
 st.sidebar.header("Select Filters:")
 selection = st.sidebar.multiselect(
@@ -44,11 +40,7 @@ Type = st.sidebar.multiselect(
         options = data["Season"].unique(),
         default = data["Season"].unique())
 
-#selection = st.multiselect(
-#    "Select Year:",
-#        options = Years,
-#        default = Years)
-#subset = data[data['Year'] == selection]
+
 drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
 subset1 = drop_data.query("Year == @selection")
@@ -72,10 +64,8 @@ col4.metric('Silver Medals', silver)
 col5.metric('Bronze Medals', bronze)
 
 bar_data = subset.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
-#line_data = subset.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
 line_data = pd.crosstab(subset['Year'], subset['Medal'])
 
-#st.dataframe(line_data)
 with st.container():
     left, right = st.columns(2)
     right.header('No. of Medals by Year')
