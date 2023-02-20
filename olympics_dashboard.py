@@ -33,6 +33,17 @@ st.header('Olympic History Dashboard')
 Years = data['Year'].unique()
 #selection = st.multiselect('Select Year', Years)
 
+st.sidebar.header("Select Filters:")
+selection = st.multiselect(
+    "Select Year:",
+        options = Years,
+        default = Years)
+
+Type = st.sidebar.multiselect(
+    "Select Season:",
+        options = data["Season"].unique(),
+        default = data["Season"].unique())
+
 selection = st.multiselect(
     "Select Year:",
         options = Years,
