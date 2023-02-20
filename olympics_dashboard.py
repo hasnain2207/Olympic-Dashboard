@@ -30,15 +30,6 @@ data = pd.merge(df1, df2)
 data.info()
 #df = data.drop(['notes'],axis=1)
 
-total_participations = data['ID'].count()
-total_olympians = data['ID'].nunique()
-countries = data['NOC'].nunique()
-gold = data.Medal.value_counts().Gold
-silver = data.Medal.value_counts().Silver
-bronze = data.Medal.value_counts().Bronze
-
-st.header('Olympic History Dashboard')
-col1, col2, col3, col4, col5 = st.columns(5)
 Years = data['Year'].unique()
 #selection = st.multiselect('Select Year', Years)
 
@@ -51,7 +42,17 @@ drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
 subset1 = drop_data.query("Year == @selection")
 subset = data.query("Year == @selection")
-#st.dataframe(subset)
+
+total_participations = subset['ID'].count()
+total_olympians = subset['ID'].nunique()
+countries = subset['NOC'].nunique()
+gold = subset.Medal.value_counts().Gold
+silver = subset.Medal.value_counts().Silver
+bronze = subset.Medal.value_counts().Bronze
+
+st.header('Olympic History Dashboard')
+col1, col2, col3, col4, col5 = st.columns(5)
+
 
 col1.metric('Number of Participations', total_participations)
 col2.metric('Number of Olympians', total_olympians)
@@ -60,7 +61,7 @@ col4.metric('Silver Medals', silver)
 col5.metric('Bronze Medals', bronze)
 
 bar_data = subset.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
-#line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
+#line_data = subset.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
 line_data = pd.crosstab(subset['Year'], subset['Medal'])
 
 #st.dataframe(line_data)
