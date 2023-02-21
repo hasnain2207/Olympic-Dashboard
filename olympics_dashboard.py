@@ -78,7 +78,8 @@ with st.container():
 cols = st.columns([1, 1])
 
 with cols[0]:
-    medal_type = st.selectbox('Medal Type', data['Medal'].unique())
+    #medal_type = st.selectbox('Medal Type', data['Medal'].count())
+    medal_type = data['Medal'].count()
     
     fig = px.pie(data, values=medal_type, names='Sex',
                  title=f'number of {medal_type} medals',
