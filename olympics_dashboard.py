@@ -66,7 +66,7 @@ col5.metric('Bronze Medals', bronze)
 
 bar_data = subset.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
 line_data = pd.crosstab(subset['Year'], subset['Medal'])
-pie_values = subset.groupby('Medal')['Sex'].count().sort_values(ascending=False).head(10)
+pie_values = subset.groupby('Sex')['Medal'].count().sort_values(ascending=False).head(10)
 
 st.dataframe(pie_values)
 with st.container():
@@ -83,7 +83,7 @@ with cols[0]:
     #medal_type = st.selectbox('Medal Type', data['Medal'].count())
     medal_type = subset['Medal'].count()
     
-    fig = px.pie(subset, values=bar_data, names='Sex')
+    fig = px.pie(subset, values=pie_values, names='Sex')
 #                 title=f'number of {medal_type} medals',
 #                 height=300, width=200)
 #    fig.update_layout(margin=dict(l=20, r=20, t=30, b=0),)
