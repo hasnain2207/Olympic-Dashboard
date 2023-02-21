@@ -80,7 +80,7 @@ cols = st.columns([1, 1])
 with cols[0]:
     medal_type = st.selectbox('Medal Type', subset['Medal'].unique())
     
-    fig = px.pie(subset, values=medal_type, names='Sex',
+    fig = px.pie(subset, values=medal_type, names=subset['Sex'],
                  title=f'number of {medal_type} medals',
                  height=300, width=200)
     fig.update_layout(margin=dict(l=20, r=20, t=30, b=0),)
