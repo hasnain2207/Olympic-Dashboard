@@ -81,11 +81,11 @@ with cols[0]:
     #medal_type = st.selectbox('Medal Type', data['Medal'].count())
     medal_type = subset['Medal'].count()
     
-#    fig = px.pie(subset, values=gold, names='Sex',
-#                 title=f'number of {medal_type} medals',
-#                 height=300, width=200)
-#    fig.update_layout(margin=dict(l=20, r=20, t=30, b=0),)
-#    st.plotly_chart(fig, use_container_width=True)
+    fig = px.pie(subset, values=total_participations, names='Sex',
+                 title=f'number of {medal_type} medals',
+                 height=300, width=200)
+    fig.update_layout(margin=dict(l=20, r=20, t=30, b=0),)
+    st.plotly_chart(fig, use_container_width=True)
 
 with cols[1]:
     st.text_input('sunburst', label_visibility='hidden', disabled=True)
