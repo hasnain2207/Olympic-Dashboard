@@ -28,9 +28,10 @@ data.info()
 #df = data.drop(['notes'],axis=1)
 st.header('Olympic History Dashboard')
 Years = data['Year'].unique()
+Season = data['Season'].unique()
 
 st.sidebar.header("Select Filters:")
-Year_select = st.sidebar.multiselect(
+selection = st.sidebar.multiselect(
     "Select Year:",
         options = Years,
         default = Years)
@@ -43,8 +44,8 @@ Seasons = st.sidebar.multiselect(
 
 drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
-subset1 = drop_data.query("Years == @Year_select")
-subset = data.query("Years == @Year_select & Season == @Seasons")
+subset1 = drop_data.query("Years == @selection")
+subset = data.query("Years == @selection & Season == @Seasons")
 
 total_participations = subset['ID'].count()
 total_olympians = subset['ID'].nunique()
