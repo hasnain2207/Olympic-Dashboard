@@ -66,7 +66,9 @@ col5.metric('Bronze Medals', bronze)
 
 bar_data = subset.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
 line_data = pd.crosstab(subset['Year'], subset['Medal'])
-st.dataframe(bar_data)
+pie_values = subset.groupby('Medal')['Sex'].count().sort_values(ascending=False).head(10)
+
+st.dataframe(pie_values)
 with st.container():
     left, right = st.columns(2)
     right.header('No. of Medals by Year')
