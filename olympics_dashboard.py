@@ -8,6 +8,7 @@ Created on Sat Feb 11 22:58:33 2023
 import pandas as pd
 import numpy as np
 import streamlit as st
+import plotly.express as px
 #import matplotlib.pyplot as plt
 st.set_page_config(layout="wide")
 
@@ -73,6 +74,24 @@ with st.container():
     
     left.header('Medals Won by No. of Participations')
     left.bar_chart(bar_data)
+
+cols = st.columns([1, 1])
+
+with cols[0]:
+    medal_type = st.selectbox(data['Medal'].unique())
+    
+    fig = px.pie(subset, values=medal_type, names='Sex',
+                 title=f'number of {medal_type} medals',
+                 height=300, width=200)
+    fig.update_layout(margin=dict(l=20, r=20, t=30, b=0),)
+    st.plotly_chart(fig, use_container_width=True)
+
+with cols[1]:
+    st.text_input('sunburst', label_visibility='hidden', disabled=True)
+    fig = px.sunburst(subset, path=['Sex', 'Medal'],
+                      values='sum', height=300, width=200)
+    fig.update_layout(margin=dict(l=20, r=20, t=30, b=0),)
+    st.plotly_chart(fig, use_container_width=True)
         
 st.header('Overall View')
 st.dataframe(subset1)
