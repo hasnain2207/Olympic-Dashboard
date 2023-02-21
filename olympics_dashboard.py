@@ -43,7 +43,7 @@ Seasons = st.sidebar.multiselect(
 
 drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
-subset1 = drop_data.query("Year == @selection")
+subset1 = drop_data.query("Year == @selection & Season == @Seasons")
 subset = data.query("Year == @selection & Season == @Seasons")
 
 total_participations = subset['ID'].count()
