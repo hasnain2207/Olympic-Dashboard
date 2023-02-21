@@ -79,9 +79,9 @@ cols = st.columns([1, 1])
 
 with cols[0]:
     #medal_type = st.selectbox('Medal Type', data['Medal'].count())
-    medal_type = data['Medal'].count()
+    medal_type = subset['Medal'].count()
     
-    fig = px.pie(data, values=medal_type, names='Sex',
+    fig = px.pie(subset, values=medal_type, names='Sex',
                  title=f'number of {medal_type} medals',
                  height=300, width=200)
     fig.update_layout(margin=dict(l=20, r=20, t=30, b=0),)
