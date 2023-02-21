@@ -78,7 +78,7 @@ with st.container():
 cols = st.columns([1, 1])
 
 with cols[0]:
-    medal_type = st.selectbox(subset['Medal'].unique())
+    medal_type = st.selectbox('Medal Type', subset['Medal'].unique())
     
     fig = px.pie(subset, values=medal_type, names='Sex',
                  title=f'number of {medal_type} medals',
